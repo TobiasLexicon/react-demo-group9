@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { Button } from './components/Button';
+import { useState } from 'react';
+import { Counter } from './components/Counter';
+import { Header } from './components/Header';
 
 function App() {
+  const [serial, setSerial] = useState('Trial');
+  const handleChange = () => setSerial(serial + ', trial');
+  const dataValues = ['first', 'second', 'third'];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>Welcome</h1>
+      <Counter />
+
+      {dataValues.map(ordinals => (
+        <Header headerValue={ordinals} />
+      ))}
+      <h2>{serial}</h2>
+
+      <Button change={setSerial} />
+      <Button change={handleChange} />
     </div>
   );
 }
