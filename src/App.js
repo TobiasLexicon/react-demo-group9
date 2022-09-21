@@ -1,28 +1,21 @@
+import React, { useState } from 'react';
 import './App.css';
-import { Button } from './components/Button';
-import { useState } from 'react';
-import { Counter } from './components/Counter';
 import { Header } from './components/Header';
+import { Home } from './components/Home';
+import { PersonList } from './components/PersonList';
+import { SideBar } from './components/SideBar';
 
 function App() {
-  const [serial, setSerial] = useState('Trial');
-  const handleChange = () => setSerial(serial + ', trial');
-  const dataValues = ['first', 'second', 'third'];
+  const [navigation, setNavigation] = useState(1);
 
   return (
-    <div className='App'>
-      <h1>Welcome</h1>
-      <Counter />
-
-      {dataValues.map(ordinals => (
-        <Header headerValue={ordinals} />
-      ))}
-      <h2>{serial}</h2>
-
-      <Button change={setSerial} />
-      <Button change={handleChange} />
+    <div className='containerFull'>
+      <Header changePage={setNavigation} />
+      {navigation == 1 ? <Home /> : <PersonList />};
+      <SideBar points='first'>
+        <h1>Show me</h1>
+      </SideBar>
     </div>
   );
 }
-
 export default App;
